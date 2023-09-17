@@ -35,15 +35,15 @@ Iterative loss curves using different `3` $PM_{image}$ for `Algo.1(left)` and `A
 
 Restored `Baboon` image using constructed $A_{recv}$ by `Algo.1` and `Algo.2` with different `3` $PM_{image}$
 
-![recv-calibrationM](./results/calibrationM/recv_res-r.jpg)
+![recv-1](./assets/PMs.png)
 
 Restored images using constructed $A_{recv}$ by `Algo.1(top)` and `Algo.2(Bottom)` with $PM3$
 
-![recv-calibrationM](./results/calibrationM/recv_res-r.jpg)
+![recv-1](./results/exp1/recv_res_row1_1e-4.jpg)
 
 Restored images of different noise levels using `Algo.2` with $PM3$
 
-![recv-calibrationM](./results/calibrationM/recv_res-r.jpg)
+![recv-2](./results/exp2-x/recv_res_algo2.jpg)
 
 Restored images of different noise levels using **Calibration of Unknown Measurement Matrix Algorithm**
 ![recv-calibrationM](./results/calibrationM/recv_res-r.jpg)
