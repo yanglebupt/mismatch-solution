@@ -16,6 +16,36 @@ matched and recover original images.
 
 ## Method
 
+We provide three algorithms for constructing measurement matrix $A_{recv}$ to convert mismatched problem into matched problem.
+
+|  Algo.1   | Algo.2  | Calibration.M |
+|  :----:  | :----:  | :----: |
+| ![Algo.1](./assets/algo1.png)  | ![Algo.2](./assets/algo2.png) | ![Calibration.M](./assets/cm.png) |
+
+Compressed sensing algorithm used in experiments is $GPSR$
+
+## Results
+Mismatched Restored images
+![s](./results/mismatch_recv_res.jpg)
+
+Iterative loss curves using different `3` $PM_{image}$ for `Algo.1(left)` and `Algo.2(right)`
+|||
+|  :----:  | :----:  |
+| ![Algo.1](./results/exp0/algo1-curve.jpg)  | ![Algo.2](./results/exp0/algo2-curve.jpg) |
+
+Restored `Baboon` image using constructed $A_{recv}$ by `Algo.1` and `Algo.2` with different `3` $PM_{image}$ 
+![recv-1](./assets/PMs.png)
+
+Restored images using constructed $A_{recv}$ by `Algo.1(top)` and `Algo.2(Bottom)` with $PM3$
+![recv-1](./results/exp1/recv_res_row1_1e-4.jpg)
+
+Restored images of different noise levels using `Algo.2` with $PM3$
+![recv-2](./results/exp2-x/recv_res_algo2.jpg)
+
+Restored images of different noise levels using **Calibration of Unknown Measurement Matrix Algorithm**
+![recv-2](./results/calibrationM/recv_res-r.jpg)
+
+
 ## Running Experiments
 
 ### Environment
@@ -67,7 +97,7 @@ We did four different experiments in the paper and saved their constructed measu
 
 ## Notes
 
-We suggest that you have <font color="red"><b>sufficient storage</font></b> to store the various results of constructed $A_{recv}$ when running the experiments. <font color="red"><b>Otherwise, you need to change the code to an unsaved form and directly use the constructed $A_{recv}$ to restore images and show visualization results.</font></b>
+We suggest that you have **sufficient storage** to store the various results of constructed $A_{recv}$ when running the experiments. **Otherwise, you need to change the code to an unsaved form and directly use the constructed** $A_{recv}$ **to restore images and show visualization results**.
 
 ## References
 
