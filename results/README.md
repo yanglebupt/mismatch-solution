@@ -48,8 +48,8 @@ Both include *Algorithm 1* `(algo1)` and *Algorithm 2* `(algo2)`, so only `exp{}
 
 ### Calibration
 - `calibrationM/A_recvs.h5` include calibration results ***Algorithm 4: Calibration of Unknown Measurement Matrix*** with different noise levels $\sigma=(0,0.5,1,1.5,2)$. The key of datasets are 
-  - $"nosie\_\{\}".format(\sigma)$ is $A_{recv}$
-  - $"y\_nosie\_\{\}".format(\sigma)$ is $y_u$
+  - `nosie_{}.format($\sigma$)` is $A_{recv}$
+  - `y_nosie_{}".format($\sigma$)` is $y_u$
 
 - `calibrationN/A_recvs.h5` Abandoned and unused
 
