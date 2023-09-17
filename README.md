@@ -67,7 +67,7 @@ We did four different experiments in the paper and saved their constructed measu
 
 ## Notes
 
-We suggest that you have <font color="red"><b>sufficient storage</font></b> to store the various results of constructed $A_{recv}$ when running the experiments. <font color="red"><b>Otherwise, you need to change the code to an unsaved form and directly use the constructed $A_{recv}$ to restore images and show visualization results.</font>
+We suggest that you have <font color="red"><b>sufficient storage</font></b> to store the various results of constructed $A_{recv}$ when running the experiments. <font color="red"><b>Otherwise, you need to change the code to an unsaved form and directly use the constructed $A_{recv}$ to restore images and show visualization results.</font></b>
 
 ## References
 
