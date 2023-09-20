@@ -12,42 +12,61 @@ unknown measurement matrix. Therefore, we propose mismatch equation and
 establish two types of algorithm based on it, which are matched solution of
 unknown measurement matrix and calibration of unknown measurement matrix. Experiments have shown that when under low gaussian noise levels, the
 constructed measurement matrix can transform the mismatch problem into
-matched and recover original images.
+matched and restore original images.
 
-## Method
+## Methods
 
 We provide three algorithms for constructing measurement matrix $A_{recv}$ to convert mismatched problem into matched problem.
 
-|  Algo.1   | Algo.2  | Calibration.M |
+|  Algo.1   | Algo.2  | Algo.3 |
 |  :----:  | :----:  | :----: |
 | ![Algo.1](./assets/algo1.png)  | ![Algo.2](./assets/algo2.png) | ![Calibration.M](./assets/cm.png) |
 
-Compressed sensing algorithm used in experiments is $GPSR$
+Then we use the constructed measurement matrix $A_{recv}$ and measurement value $y'$ under
+unknown measurement matrix put into compressed sensing algorithm $GPSR$ to restore original images.
 
 ## Results
-Mismatched Restored images
-![mismatch_recv_res](./results/mismatch_recv_res.jpg)
+Mismatched Restored images: We use mismatched pair $(y', A)$ to restore original images.
+![s](./results/mismatch_recv_res.jpg)
 
-Iterative loss curves using different `3` $PM_{image}$ for `Algo.1(left)` and `Algo.2(right)`
+### Exps in the Device with Medium Precision
+We collect $M=2500$ speckle patterns ($N=128*128$) from multimode fiber at an offset of 25 as unknown measurement matrix $A_u$, speckle patterns collected from multimode fiber at an offset of 0 as measurement matrix $A$ for pre-measurement. We use GPSR algorithm as compressed sensing recovery. 7 images $x'$ are selected for the experiments. And Experiments (Exps) are implemented with RTX 2080 Ti (11GB), Pytorch. During the experiments, we find that some of the experimental results are related to the precision of the device used, which we will discuss in the next section.
+
+#### Exp0
+
+Iterative loss curves using different `3` **Pre-Measure Images** ($PM_{image}$) for `Algo.1(left)` and `Algo.2(right)`.
 |||
 |  :----:  | :----:  |
 | ![Algo.1](./results/exp0/algo1-curve.jpg)  | ![Algo.2](./results/exp0/algo2-curve.jpg) |
 
-Restored `Baboon` image using constructed $A_{recv}$ by `Algo.1` and `Algo.2` with different `3` $PM_{image}$
-
+Restored `Baboon` image using constructed $A_{recv}$ by `Algo.1` and `Algo.2` with different `3` $PM_{image}$. 
 ![recv-1](./assets/PMs.png)
 
-Restored images using constructed $A_{recv}$ by `Algo.1(top)` and `Algo.2(Bottom)` with $PM3$
+
+#### Exp1
+
+Restored all images using constructed $A_{recv}$ by `Algo.1(top)` and `Algo.2(Bottom)` with $PM3$.
 
 ![recv-1](./results/exp1/recv_res_row1_1e-4.jpg)
 
-Restored images of different noise levels using `Algo.2` with $PM3$
+Restored all images of different noise levels $\sigma=(0,0.5,1,1.5,2,5)$ using `Algo.2` with $PM3$.
 
 ![recv-2](./results/exp2-x/recv_res_algo2.jpg)
 
-Restored images of different noise levels using **Calibration of Unknown Measurement Matrix Algorithm**
-![recv-calibrationM](./results/calibrationM/recv_res-r.jpg)
+#### Exp3
 
+Restored all images of different noise levels $\sigma=(0,0.5,1,1.5,2)$ using `Algo.3` in **Calibration of Unknown Measurement Matrix Algorithm**.
+
+![recv-2](./results/calibrationM/recv_res-r.jpg)
+
+
+### The Impact of Device Precision
+$\vec{\lambda}$ components curves of three algorithms in three devices. From left to right, the columns represent Algorithm.1, Algorithm.2 and Algorithm.3. From top to bottom, the rows represent RTX2080 Ti, RTXA400, RTX3090. Algorithm.1 and Algorithm.2 calculated by float32, algorithm.3 calculated by float64. Range variable represents the range of components, which is maximum component minus 
+minimum component.
+
+![recv-2](./assets/mt.png)
+
+![recv-2](./assets/mt_res.png)
 
 ## Running Experiments
 
@@ -96,11 +115,18 @@ Different displacement MMF measurement matrixs at https://drive.google.com/drive
 
 ## Results of Exps
 
-We did four different experiments in the paper and saved their constructed measurement matrix $A_{recv}$ and corresponding measurement value $y_u$ of the unkown measurement matrix $A_u$ at 【https://drive.google.com/drive/folders/1_RlwkPU6pSR6FRqWL7TT7ovwtphenpcy?usp=drive_link】. You can download it and replace the `/results` folder. Then you can run $GPSR$ algorithm in `recv-exps.ipynb` and `calibration-M.ipynb?#recv`. You can also try other compressed sensing algorithms to reconstruct original images.
+We do four different experiments in the paper and save their constructed measurement matrix $A_{recv}$ and corresponding measurement value $y_u$ of the unkown measurement matrix $A_u$ at https://www.kaggle.com/datasets/yanglebupt/mismatch-solution. You can download it and replace the folder as follows. 
+```
+mismatch-solution/results  --> /results
+mismatch-solution-exp2-x/exp2-x  --> /results/exp2-x
+```
+Then you can run $GPSR$ algorithm in `recv-exps.ipynb` and `calibration-M.ipynb?#recv`. You can also try other compressed sensing algorithms to restore original images.
 
 ## Notes
 
 We suggest that you have **sufficient storage** to store the various results of constructed $A_{recv}$ when running the experiments. **Otherwise, you need to change the code to an unsaved form and directly use the constructed** $A_{recv}$ **to restore images and show visualization results**.
+
+Because after constructing $A_{recv}$, we don't directly to restore the original images, but instead save them as `.h5` files. And then in another `ipynb` read from those `.h5` files and input into GPSR to restore the original images. This makes it convenient to experiment with other compression sensing algorithms without the need to rerun construction code for $A_{recv}$.
 
 ## References
 
