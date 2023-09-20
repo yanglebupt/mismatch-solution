@@ -27,6 +27,7 @@ unknown measurement matrix put into compressed sensing algorithm $GPSR$ to resto
 
 ## Results
 Mismatched Restored images: We use mismatched pair $(y', A)$ to restore original images.
+
 ![s](./results/mismatch_recv_res.jpg)
 
 ### Exps in the Device with Medium Precision
@@ -40,6 +41,7 @@ Iterative loss curves using different `3` **Pre-Measure Images** ($PM_{image}$) 
 | ![Algo.1](./results/exp0/algo1-curve.jpg)  | ![Algo.2](./results/exp0/algo2-curve.jpg) |
 
 Restored `Baboon` image using constructed $A_{recv}$ by `Algo.1` and `Algo.2` with different `3` $PM_{image}$. 
+
 ![recv-1](./assets/PMs.png)
 
 
